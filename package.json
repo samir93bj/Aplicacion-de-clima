@@ -1,0 +1,25 @@
+{
+  "name": "05-aplicacion-clima",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samir93bj/Aplicacion-de-clima.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samir93bj/Aplicacion-de-clima/issues"
+  },
+  "homepage": "https://github.com/samir93bj/Aplicacion-de-clima#readme",
+  "dependencies": {
+    "color": "^4.2.0",
+    "inquirer": "^8.2.0"
+  }
+}
