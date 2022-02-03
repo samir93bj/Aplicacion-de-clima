@@ -10,12 +10,20 @@ class Busquedas  {
     async ciudad(lugar = '') {
 
         try{
-            const resp = await axios.get('https://reqres.in/api/users');
-            console.log(resp.data.data[1].email);
+            //PETICION HTTPS
+            const intance = axios.create({
+                baseURL: `https://api.mapbox.com/geocoding/v5/mapbox.places/${lugar}.json`,
+                params: {
+                    'access_token' :'pk.eyJ1Ijoic2FtaXI5M2JqIiwiYSI6ImNrejY3YXR0eDB2dmwzMHB2dGt6ZzJjNjkifQ.Q27LYUT_fQ_un3NuL2pKLw',
+                    'limit':5  
+                }
+            });
 
-            return [];
+            const resp = await intance.get();
+            console.log(resp.data);
+
         }catch(e){
-            return[];
+            return console.error(`${e}`);
         }
     
     }

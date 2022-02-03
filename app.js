@@ -11,22 +11,22 @@ const main = async () => {
         switch(opt){
             case 1:
                 //Mostrat Mensaje
-                const lugar = await leerInput("Ingrese Ciudad: ");
-                busquedas.ciudad();
+                    const lugar = await leerInput("Ingrese Ciudad: ");
+                    await busquedas.ciudad(lugar);
                 //Buscar los lugares
 
                 //Seleccionar el lugar
 
                 //Clima
 
-                //Mostrar Resultados
+                /*Mostrar Resultados
                 console.log("\nInformacion de la ciudad\n".green);
                 console.log("Ciudad");
                 console.log("Lat");
                 console.log("Lng");
                 console.log("Temperatura");
                 console.log("Minima");
-                console.log("Maxima");
+                console.log("Maxima");*/
 
             break;
 
