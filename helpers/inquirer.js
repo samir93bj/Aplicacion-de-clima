@@ -23,7 +23,7 @@ const preguntas = [
     }
 ];
 
-
+//Funcion para renderizar el menu 
 const inquirerMenu = async() => {
 
     console.clear();
@@ -36,6 +36,7 @@ const inquirerMenu = async() => {
     return opcion;
 }
 
+//Pausamos ejecucion 
 const pausa = async() => {
     
     const question = [
@@ -50,6 +51,7 @@ const pausa = async() => {
     await inquirer.prompt(question);
 }
 
+//Funcion para tomar los input en consola
 const leerInput = async( message ) => {
 
     const question = [
@@ -70,18 +72,20 @@ const leerInput = async( message ) => {
     return desc;
 }
 
-const listadoTareasBorrar = async( tareas = [] ) => {
+//Funcion que recibe un arregle y lo muestra como listado de opciones
+const listado = async( array = [] ) => {
 
-    const choices = tareas.map( (tarea, i) => {
+    const choices = array.map( (reg, i) => {
 
         const idx = `${i + 1}.`.green;
 
         return {
-            value: tarea.id,
-            name:  `${ idx } ${ tarea.desc }`
+            value: reg.id,
+            name:  `${ idx } ${ reg.name }`
         }
     });
 
+    //Nos permite colocar la opcion de Cancelar al inicio del arreglo
     choices.unshift({
         value: '0',
         name: '0.'.green + ' Cancelar'
@@ -91,15 +95,16 @@ const listadoTareasBorrar = async( tareas = [] ) => {
         {
             type: 'list',
             name: 'id',
-            message: 'Borrar',
+            message: 'Seleccionar Lugar',
             choices
         }
     ]
 
-    const { id } = await inquirer.prompt(preguntas);
+    const {id} = await inquirer.prompt(preguntas); //Lo que seleccionamos desde la consola lo almacenamos como {param que no retorno un {} }
     return id;
 }
 
+//Funcion para renderizar y confirmar
 const confirmar = async(message) => {
 
     const question = [
@@ -114,6 +119,7 @@ const confirmar = async(message) => {
     return ok;
 }   
 
+//Renderizado y seleccion en check list
 const mostrarListadoChecklist = async( tareas = [] ) => {
 
     const choices = tareas.map( (tarea, i) => {
@@ -146,7 +152,7 @@ module.exports = {
     inquirerMenu,
     pausa,
     leerInput,
-    listadoTareasBorrar,
+    listado,
     confirmar,
     mostrarListadoChecklist
 }

@@ -1,4 +1,4 @@
-const { leerInput, pausa, inquirerMenu } = require('./helpers/inquirer.js'); 
+const { leerInput, pausa, inquirerMenu, listado } = require('./helpers/inquirer.js'); 
 const Busquedas = require('./models/busqueda');
 
 const main = async () => {
@@ -10,23 +10,26 @@ const main = async () => {
 
         switch(opt){
             case 1:
-                //Mostrat Mensaje
-                    const lugar = await leerInput("Ingrese Ciudad: ");
-                    await busquedas.ciudad(lugar);
-                //Buscar los lugares
+                //Mostrar Mensaje
+                    const termino = await leerInput("Ingrese Ciudad: ");
+                
+                //Buscar los lugares    
+                    const lugares = await busquedas.ciudad(termino);
 
                 //Seleccionar el lugar
+                    const id = await listado(lugares);
+                    const lugarSelect = lugares.find( lugar => lugar.id === id); //Devuelve el primer registro que encuentra con dichos coincidencias
 
                 //Clima
 
-                /*Mostrar Resultados
+                /*Mostrar Resultados*/
                 console.log("\nInformacion de la ciudad\n".green);
-                console.log("Ciudad");
-                console.log("Lat");
-                console.log("Lng");
+                console.log("Ciudad: ",lugarSelect.name);
+                console.log("Lat ",lugarSelect.lat);
+                console.log("Lng",lugarSelect.lng);
                 console.log("Temperatura");
                 console.log("Minima");
-                console.log("Maxima");*/
+                console.log("Maxima");
  
             break;
 

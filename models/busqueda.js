@@ -15,14 +15,22 @@ class Busquedas  {
             const intance = axios.create({
                 baseURL: `https://api.mapbox.com/geocoding/v5/mapbox.places/${lugar}.json`,
                 params: {
-                    'access_token' : process.env.MAPBOX_KEY,
+                    'access_token' : process.env.MAPBOX_KEY, //Utilizamos dotenv para preparar las variables de entorno
                     'limit':5,
                     'language' : 'es'  
                 }
             });
 
             const resp = await intance.get();
-            console.log(resp.data);
+            
+            //Una vez que obtenemos la respuesta de la consulta, utilizamos la funcion map para recorrer el arreglo y almacenar los datos
+            return resp.data.features.map(lugar => ({
+                id : lugar.id,
+                name : lugar.place_name,
+                lng : lugar.center[0],
+                lat : lugar.center[1]   
+            })
+            );
 
         }catch(e){ 
             return console.error(`${e}`);
