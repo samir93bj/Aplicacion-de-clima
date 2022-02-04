@@ -27,7 +27,7 @@ const main = async () => {
                 console.log("Temperatura");
                 console.log("Minima");
                 console.log("Maxima");*/
-
+ 
             break;
 
             case 2:

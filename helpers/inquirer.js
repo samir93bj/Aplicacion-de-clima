@@ -134,7 +134,7 @@ const mostrarListadoChecklist = async( tareas = [] ) => {
             message: 'Selecciones',
             choices
         }
-    ]
+    ] 
 
     const { ids } = await inquirer.prompt(pregunta);
     return ids;
