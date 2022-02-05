@@ -1,13 +1,20 @@
+const fs = require('fs'); //Utilizamos para aplicar funciones de fileServer
+
+const axios = require('axios').default; // Axios para conexion a los EndPoint
+
 require('dotenv').config()
-const axios = require('axios').default;
+
 
 class Busquedas  {
-    histrial = ['Buenos Aires','Tucuman','Cordoba','Salta'];
+
+    historial = [];
+    dbPath='./db/database.json';
 
     constructor(){
         //TODO: Leer si existe la DB
     }
 
+    //FUNCION PARA OBTENER CIUDAD
     async ciudad(lugar = '') {
 
         try{
@@ -48,6 +55,7 @@ class Busquedas  {
     }
 
 
+    //FUNCION PARA OBTENER CLIMA DEL LUGAR
     async climaLugar(lat,lon){
 
         try{
@@ -72,6 +80,30 @@ class Busquedas  {
             console.log(`${e}`);
 
         }
+    }
+
+    async guardarLugar(lugar = ''){
+
+        //Verificamos que no esten repetidos los datos
+        if(this.historial.includes(lugar.toLocaleLowerCase())){
+            return;
+        };
+
+        //TODO: evitar guardado de duplicados
+        this.historial.unshift(lugar.toLocaleLowerCase()); //unshift nos permite guardar al inicio del arreglo
+
+        //Guardar en Base de Datos
+        this.guardarDB();
+    }
+
+     //Grabar en DB
+     guardarDB(){
+
+        const payload = {
+            historial : this.historial
+        }
+
+        fs.writeFileSync(this.dbPath, JSON.stringify( payload ));
     }
 }
 

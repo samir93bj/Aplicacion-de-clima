@@ -18,8 +18,13 @@ const main = async () => {
 
                 //Seleccionar el lugar
                     const id = await listado(lugares);
+                    if (id === '0') continue;
                     const lugarSelect = lugares.find( lugar => lugar.id === id); //Devuelve el primer registro que encuentra con dichos coincidencias
 
+
+                //Guardar en DB 
+                busquedas.guardarLugar(lugarSelect.name);
+                    
                 //Clima
 
                     const clima = await busquedas.climaLugar(lugarSelect.lat, lugarSelect.lng);
@@ -37,7 +42,11 @@ const main = async () => {
             break;
 
             case 2:
-                console.log('Seleccionaste la opcion 2');
+                busquedas.historial.forEach((lugar,i) => {
+                    const idx = `${i + 1}.`.green;
+                    console.log(` ${idx} ${lugar} `);
+                });
+
             break;
         }
 
