@@ -12,6 +12,18 @@ class Busquedas  {
 
     constructor(){
         //TODO: Leer si existe la DB
+        this.leerDb();
+    }
+
+    //Capitalizar Historial
+    get historialCapitalizado(){
+
+        return this.historial.map(lugar => {
+            let palabras = lugar.split(' ');
+            palabras = palabras.map( p => p[0].toUpperCase() + p.substring(1) );
+
+            return palabras.join(' ');
+        });
     }
 
     //FUNCION PARA OBTENER CIUDAD
@@ -104,6 +116,18 @@ class Busquedas  {
         }
 
         fs.writeFileSync(this.dbPath, JSON.stringify( payload ));
+    }
+
+    //Leer DB
+    async leerDb(){
+
+        // Debe de existir...
+        if( !fs.existsSync( this.dbPath) ) return;
+        
+        const info = fs.readFileSync(this.dbPath, { encoding: 'utf-8' });
+        const data = JSON.parse( info ); //Parseamos para que vuelva a ser un JSON
+    
+        this.historial = data.historial;
     }
 }
 
